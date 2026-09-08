@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WilkyBot Hosting — Hosting Bot Cepat & Stabil</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+ <script src="config.js"></script>
+ <script src="script.js" defer></script>
+</head>
+<body>
+<div id="boot-screen" style="position:fixed;inset:0;z-index:9999;background:#000;display:flex;align-items:center;justify-content:center;">
+ <div style="width:min(300px,86vw);display:flex;flex-direction:column;gap:14px;align-items:flex-start;">
+ <div style="font-family:'JetBrains Mono',monospace;font-weight:800;font-size:22px;color:#c9a227;letter-spacing:0.2em;">WILKYBOT</div>
+ <div id="boot-sub" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(201,162,39,0.4);letter-spacing:0.06em;min-height:16px;">menyiapkan sistem...</div>
+ <div style="width:100%;height:2px;background:rgba(201,162,39,0.08);border-radius:2px;overflow:hidden;">
+ <div id="boot-bar" style="height:100%;width:0%;background:linear-gradient(90deg,#c9a227,#c9a227);box-shadow:0 0 8px rgba(201,162,39,0.4);transition:width 0.35s ease;"></div>
+ </div>
+ <div id="boot-pct" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(201,162,39,0.3);align-self:flex-end;">0%</div>
+ </div>
+</div>
+<script>
+(function(){
+ var el=document.getElementById('boot-screen');
+ if(!el)return;
+ if(sessionStorage.getItem('wb-booted')){el.style.display='none';return;}
+ var bar=document.getElementById('boot-bar'),pctEl=document.getElementById('boot-pct'),sub=document.getElementById('boot-sub');
+ var steps=['loading plugins...','connecting gateway...','starting AI...','syncing database...','almost ready...','done.'];
+ var i=0;
+ function hide(){clearTimeout(hard);el.style.transition='opacity 0.45s ease';el.style.opacity='0';setTimeout(function(){el.style.display='none';},480);sessionStorage.setItem('wb-booted','1');}
+ var hard=setTimeout(hide,5000);
+ function tick(){var p=Math.round(((i+1)/steps.length)*100);if(bar)bar.style.width=p+'%';if(pctEl)pctEl.textContent=p+'%';if(sub)sub.textContent=steps[i]||'done.';i++;if(i>=steps.length){setTimeout(hide,350);return;}setTimeout(tick,380+Math.floor(Math.random()*140));}
+ setTimeout(tick,120);
+})();
+</script>
+<style>body{padding-bottom:90px;}.site-nav{display:none;}</style>
+
+ <!-- HEADER BRAND - static di document flow, ikut scroll, horror glitch -->
+ <div id="brand-header" style="display:flex;align-items:center;padding:18px 24px;border-bottom:1px solid rgba(201,162,39,0.10);">
+ <span id="brand-text" class="brand-glitch">WilkyBot</span>
+ </div>
+
+<div class="scanline"></div>
+<div class="bg-overlay"></div>
+<div class="bg-overlay-2"></div>
+
+<!-- Navbar -->
+<header id="navbar" class="site-nav">
+ <div class="nav-inner">
+ <a href="#beranda" class="nav-brand">
+ <img src="assets/foto.png" alt="Logo WilkyBot" class="nav-brand-mark" onerror="this.style.display='none';">
+ <span>WilkyBot</span>
+ </a>
+ <nav class="nav-links">
+ <a href="#beranda">Beranda</a>
+ <a href="#fitur">Fitur</a>
+ <a href="#perintah">Perintah</a>
+ <a href="#donasi">Donasi</a>
+ <a href="#grup">Grup</a>
+ <a href="#kontak">Kontak</a>
+ </nav>
+ <div class="nav-actions">
+ <button id="theme-toggle" aria-label="Ganti tampilan gelap/terang" type="button">
+ <span id="theme-icon"></span>
+ </button>
+ <a href="https://wa.me/NOMOR_BOT" target="_blank" rel="noopener" class="nav-cta">Chat Bot</a>
+ </div>
+ <button id="menu-toggle" class="menu-toggle" aria-label="Buka menu" aria-expanded="false" type="button">
+ <span></span><span></span><span></span>
+ </button>
+ </div>
+ <nav id="mobile-menu" class="mobile-menu">
+ <a href="#beranda">Beranda</a>
+ <a href="#fitur">Fitur</a>
+ <a href="#perintah">Perintah</a>
+ <a href="#donasi">Donasi</a>
+ <a href="#grup">Grup</a>
+ <a href="#kontak">Kontak</a>
+ </nav>
+</header>
+
+<main>
+
+ <!-- Hero -->
+ <!-- Hero -->
+ <section id="beranda" class="hero">
+ <div class="hero-inner">
+ <div class="hero-copy reveal">
+ <span class="eyebrow-pill">Aktif 24/7 · Gratis Digunakan</span>
+ <span class="status-badge" id="status-badge"><span class="status-dot"></span><span id="status-text">Online</span></span>
+ <h1 id="hero-title">Otomatisasi WhatsApp <em>Tanpa Ribet.</em></h1>
+ <p class="hero-desc" id="hero-desc">WilkyBot membantu membalas pesan otomatis, membuat stiker, mengunduh media, hingga berinteraksi dengan AI — seluruhnya langsung dari WhatsApp tanpa instalasi tambahan.</p>
+ <div class="hero-buttons">
+ <a href="https://wa.me/NOMOR_BOT" target="_blank" rel="noopener" class="btn-neon-primary" id="btn-chat-bot">
+ <span class="btn-neon-text">Mulai Sekarang &rarr;</span>
+ </a>
+ <a href="https://chat.whatsapp.com/LINK_GRUP" target="_blank" rel="noopener" class="btn-steel-secondary" id="btn-join-group">
+ Grup Komunitas
+ </a>
+ <button class="btn-share" id="btn-share" type="button">
+ Bagikan Halaman
+ </button>
+ </div>
+ <div class="hero-stats">
+ <div><strong>12rb+</strong><span>Pengguna Aktif</span></div>
+ <div><strong>4.9/5</strong><span>Kepuasan Pengguna</span></div>
+ <div><strong>24/7</strong><span>Selalu online</span></div>
+ </div>
+ </div>
+ <div class="hero-art reveal" aria-hidden="true">
+ <img src="assets/demo-screenshot.png" alt="Tampilan WilkyBot" class="hero-screenshot"
+ onerror="this.style.display='none'">
+ </div>
+ </div>
+ </section>
+
+ <!-- STATS -->
+<section class="tw-section tw-bg-a tw-py-sm" id="stats">
+ <div class="tw-container tw-w-6xl">
+ <div class="tw-grid tw-grid-4-tight" id="stats-grid"></div>
+ </div>
+</section>
+
+<!-- Fitur -->
+ <section id="fitur" class="section">
+ <div class="section-inner">
+ <h2 class="reveal">Semua yang Anda Butuhkan, Ada di WilkyBot</h2>
+ <p class="section-desc reveal">Fitur-fitur ini dibuat supaya WhatsApp Anda terasa lebih hidup dan mudah dipakai siapa saja. Ketuk kartu untuk langsung mencoba fiturnya.</p>
+ <div class="feature-grid">
+ <a class="feature-card reveal" href="https://wa.me/NOMOR_BOT?text=Halo%20WilkyBot%2C%20aktifkan%20fitur%20auto-reply" target="_blank" rel="noopener">
+ <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+ <h3>Auto-Reply</h3>
+ <p>Membalas pesan penting secara otomatis, kapan pun Anda sedang tidak sempat merespons.</p>
+ <span class="feature-cta">Coba fitur &rarr;</span>
+ </a>
+ <a class="feature-card reveal" href="https://wa.me/NOMOR_BOT?text=Halo%20WilkyBot%2C%20mau%20bikin%20stiker" target="_blank" rel="noopener">
+ <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+ <h3>Sticker Maker</h3>
+ <p>Mengonversi foto atau GIF menjadi stiker WhatsApp dalam hitungan detik.</p>
+ <span class="feature-cta">Coba fitur &rarr;</span>
+ </a>
+ <a class="feature-card reveal" href="https://wa.me/NOMOR_BOT?text=Halo%20WilkyBot%2C%20mau%20download%20video" target="_blank" rel="noopener">
+ <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+ <h3>Downloader</h3>
+ <p>Mengunduh video dan audio dari berbagai platform, langsung terkirim ke percakapan Anda.</p>
+ <span class="feature-cta">Coba fitur &rarr;</span>
+ </a>
+ <a class="feature-card reveal" href="https://wa.me/NOMOR_BOT?text=Halo%20WilkyBot%2C%20mau%20main%20game" target="_blank" rel="noopener">
+ <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><circle cx="15" cy="10" r="1"/><circle cx="18" cy="13" r="1"/></svg></div>
+ <h3>Game Seru</h3>
+ <p>Permainan tebak kata, kuis, dan game ringan untuk interaksi grup yang lebih hidup.</p>
+ <span class="feature-cta">Coba fitur &rarr;</span>
+ </a>
+ <a class="feature-card reveal" href="https://wa.me/NOMOR_BOT?text=Halo%20WilkyBot%2C%20mau%20pasang%20pengingat" target="_blank" rel="noopener">
+ <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+ <h3>Pengingat</h3>
+ <p>Mengatur pengingat harian secara otomatis, tepat waktu setiap saat.</p>
+ <span class="feature-cta">Coba fitur &rarr;</span>
+ </a>
+ <a class="feature-card reveal" href="https://wa.me/NOMOR_BOT?text=Halo%20WilkyBot%2C%20mau%20kustomisasi%20bot" target="_blank" rel="noopener">
+ <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg></div>
+ <h3>Kustomisasi Bot</h3>
+ <p>Atur nama, prefix, dan pesan sambutan bot Anda lewat dashboard, sesuai kebutuhan sendiri.</p>
+ <span class="feature-cta">Coba fitur &rarr;</span>
+ </a>
+ </div>
+ </div>
+ </section>
+
+ <!-- Cara Menggunakan -->
+ <section class="section section-alt">
+ <div class="section-inner">
+ <h2 class="reveal">Gampang, Tiga Langkah Saja</h2>
+ <p class="section-desc reveal">Tidak perlu ribet, ikuti langkah ini dan WilkyBot langsung siap membantu.</p>
+ <ol class="steps">
+ <li class="step reveal">
+ <span class="step-num">1</span>
+ <h3>Simpan Kontak WilkyBot</h3>
+ <p>Klik tombol "Mulai Sekarang" untuk otomatis membuka chat dengan WilkyBot.</p>
+ </li>
+ <li class="step reveal">
+ <span class="step-num">2</span>
+ <h3>Ketik "menu"</h3>
+ <p>Kirim pesan "menu" untuk melihat daftar lengkap fitur yang tersedia.</p>
+ </li>
+ <li class="step reveal">
+ <span class="step-num">3</span>
+ <h3>Mulai ngobrol</h3>
+ <p>Pilih fitur yang Anda butuhkan, dan WilkyBot akan merespons secara langsung.</p>
+ </li>
+ </ol>
+ </div>
+ </section>
+
+ <!-- PRICING -->
+ <section class="tw-section tw-bg-b" id="pricing">
+ <div class="tw-container tw-w-6xl text-center">
+ <span class="tw-eyebrow">PRICING</span>
+ <h2 class="tw-heading">Pilih Paket Sewa</h2>
+ <p class="tw-desc tw-mb-8">Fitur lengkap di semua paket — pembeda cuma durasi sewa. Makin lama, makin hemat per harinya.</p>
+
+ <div class="tw-grid tw-grid-4" id="pricing-grid" style="margin-top:8px;"></div>
+ </div>
+ </section>
+
+ <!-- Donasi (Premium) -->
+ <section id="donasi" class="tw-section tw-bg-a">
+ <div class="tw-container tw-w-xl">
+ <span class="tw-eyebrow">DONASI & SUPPORT</span>
+ <h2 class="tw-heading">Donasi &amp; Support</h2>
+ <p class="tw-desc tw-mb-10">Operasional WilkyBot didukung oleh kontribusi pengguna. Setiap donasi digunakan sepenuhnya untuk biaya infrastruktur server.</p>
+
+ <div id="payment-cards" style="display:flex;flex-direction:column;gap:12px;text-align:left;"></div>
+
+ <p style="font-size:12px;color:#a89fb8;margin-top:20px;">
+ Sudah melakukan pembayaran? <a href="https://wa.me/6282323918046" target="_blank" style="color:#c9a227;font-weight:700;text-decoration:none;">Kirim Konfirmasi →</a>
+ </p>
+
+ <div id="leaderboard" style="margin-top:32px;"></div>
+ </div>
+ </section>
+
+ <!-- Testimoni -->
+ <section class="section">
+ <div class="section-inner">
+ <span class="eyebrow-pill"> Kata Mereka</span>
+ <h2 class="reveal">Apa Kata Pengguna Kami</h2>
+ <div class="testi-carousel reveal">
+ <!-- Form submit testimoni -->
+ <div id="testi-form-wrap" style="max-width:420px;margin:0 auto 32px;text-align:left;">
+ <div style="background:rgba(24,20,38,0.85);border:1px solid rgba(201,162,39,0.12);border-radius:16px;padding:22px;backdrop-filter:blur(14px);">
+ <p style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#c9a227;letter-spacing:0.08em;margin:0 0 14px;">BAGIKAN PENGALAMAN ANDA</p>
+ <div style="display:flex;flex-direction:column;gap:10px;">
+ <input id="tf-name" placeholder="Nama Anda" maxlength="30" style="background:rgba(0,0,0,0.3);border:1px solid rgba(201,162,39,0.15);border-radius:8px;padding:10px 14px;color:#f2eef8;font-family:'JetBrains Mono',monospace;font-size:12px;outline:none;width:100%;box-sizing:border-box;" onfocus="this.style.borderColor='rgba(201,162,39,0.4)'" onblur="this.style.borderColor='rgba(201,162,39,0.15)'">
+ <!-- Star picker -->
+ <div id="star-picker" style="display:flex;gap:4px;font-size:22px;cursor:pointer;" data-val="5">
+ <span data-s="1" style="color:#fbbf24;">★</span>
+ <span data-s="2" style="color:#fbbf24;">★</span>
+ <span data-s="3" style="color:#fbbf24;">★</span>
+ <span data-s="4" style="color:#fbbf24;">★</span>
+ <span data-s="5" style="color:#fbbf24;">★</span>
+ </div>
+ <textarea id="tf-msg" placeholder="Bagikan pengalaman Anda menggunakan WilkyBot..." maxlength="200" rows="3" style="background:rgba(0,0,0,0.3);border:1px solid rgba(201,162,39,0.15);border-radius:8px;padding:10px 14px;color:#f2eef8;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;outline:none;resize:none;width:100%;box-sizing:border-box;" onfocus="this.style.borderColor='rgba(201,162,39,0.4)'" onblur="this.style.borderColor='rgba(201,162,39,0.15)'"></textarea>
+ <button onclick="submitTesti()" style="padding:10px;border-radius:8px;background:#c9a227;color:#000;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px;letter-spacing:0.06em;border:none;cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='#a3821f'" onmouseout="this.style.background='#c9a227'">KIRIM ULASAN</button>
+ <p id="tf-msg-status" style="font-size:11px;color:#c9a227;font-family:'JetBrains Mono',monospace;display:none;text-align:center;"></p>
+ </div>
+ </div>
+ </div>
+
+ <div style="position:relative;max-width:420px;margin:0 auto;">
+ <button id="testi-prev" style="position:absolute;left:-20px;top:50%;transform:translateY(-50%);z-index:10;width:40px;height:40px;border-radius:50%;background:rgba(24,20,38,0.9);border:1px solid rgba(201,162,39,0.2);color:#c9a227;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;">‹</button>
+ <button id="testi-next" style="position:absolute;right:-20px;top:50%;transform:translateY(-50%);z-index:10;width:40px;height:40px;border-radius:50%;background:rgba(24,20,38,0.9);border:1px solid rgba(201,162,39,0.2);color:#c9a227;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;">›</button>
+ <div style="overflow:hidden;border-radius:20px;">
+ <div class="testi-track" id="testi-track" style="display:flex;transition:transform 0.4s ease;"></div>
+ </div>
+ <div class="testi-dots" id="testi-dots" style="display:flex;justify-content:center;gap:8px;margin-top:18px;"></div>
+ </div>
+ </div>
+ </div>
+ </section>
+
+ <!-- FAQ -->
+ <section class="tw-section tw-bg-a" id="faq">
+ <div class="tw-container tw-w-3xl">
+ <span class="tw-eyebrow">FAQ</span>
+ <h2 class="tw-heading">Pertanyaan yang Sering Diajukan</h2>
+ <p class="tw-desc-full tw-mb-10">Tidak menemukan jawaban? Hubungi tim kami langsung.</p>
+ <div class="tw-stack" id="faq-list"></div>
+ </div>
+ </section>
+
+ <!-- TEAM -->
+ <section class="tw-section tw-bg-b" id="team">
+ <div class="tw-container tw-w-5xl">
+ <span class="tw-eyebrow">TEAM</span>
+ <h2 class="tw-heading">Tim di Balik WilkyBot</h2>
+ <p class="tw-desc tw-mb-12">Tim pengembang yang membangun dan mengelola layanan ini.</p>
+ <div class="tw-grid tw-grid-3" id="team-grid"></div>
+ </div>
+ </section>
+
+ <!-- Grup -->
+ <section id="grup" class="section">
+ <div class="section-inner">
+ <div class="group-card reveal">
+ <div class="group-copy">
+ <span class="eyebrow-pill">Komunitas WilkyBot</span>
+ <h2>Bergabung dengan Komunitas Pengguna Hosting</h2>
+ <p>Berbagi tips deploy bot, troubleshooting, dan diskusi seputar hosting — semua tersedia di dalam grup. Telah bergabung <strong>2.340 anggota</strong> aktif di dalamnya.</p>
+ <a href="https://chat.whatsapp.com/LINK_GRUP" target="_blank" rel="noopener" class="btn-primary">
+ Gabung Sekarang
+ </a>
+ </div>
+ 
+ </div>
+ </div>
+ </section>
+
+<!-- Changelog -->
+<section class="section">
+ <div class="section-inner">
+ <span class="eyebrow-pill">Pembaruan Terbaru</span>
+ <h2 class="reveal">Riwayat Pembaruan WilkyBot Hosting</h2>
+ <div class="changelog-list" id="changelog-list"></div>
+ </div>
+</section>
+
+
+<footer class="site-footer">
+ <div class="footer-inner">
+ <div class="footer-brand">
+ <img src="assets/foto.png" alt="Logo WilkyBot" class="nav-brand-mark" onerror="this.style.display='none';">
+ <span>WilkyBot</span>
+ </div>
+ <nav class="footer-links">
+ <a href="#beranda">Beranda</a>
+ <a href="#fitur">Fitur</a>
+ <a href="#donasi">Donasi</a>
+ <a href="#grup">Grup</a>
+ <a href="#kontak">Kontak</a>
+ </nav>
+ <p class="footer-copy">© 2026 WilkyBot. Seluruh hak cipta dilindungi.</p>
+ </div>
+</footer>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+ <!-- BOTTOM NAV - Liquid Glass -->
+ <nav id="bottom-nav" style="position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:200;width:min(540px,calc(100vw - 24px));background:rgba(18,16,28,0.45);backdrop-filter:blur(28px) saturate(200%);-webkit-backdrop-filter:blur(28px) saturate(200%);border:1px solid rgba(201,162,39,0.12);border-radius:22px;padding:6px 8px;box-shadow:0 8px 40px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.04);">
+ <div style="display:flex;align-items:center;justify-content:space-around;">
+ <a href="#beranda" class="bn-item" data-section="beranda" style="display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 10px;border-radius:14px;text-decoration:none;transition:background 0.2s;min-width:48px;">
+ <svg width="18" height="18" fill="none" stroke="#a89fb8" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+ <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:#a89fb8;letter-spacing:0.04em;">HOME</span>
+ </a>
+ <a href="#fitur" class="bn-item" data-section="fitur" style="display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 10px;border-radius:14px;text-decoration:none;transition:background 0.2s;min-width:48px;">
+ <svg width="18" height="18" fill="none" stroke="#a89fb8" stroke-width="1.8" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+ <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:#a89fb8;letter-spacing:0.04em;">FITUR</span>
+ </a>
+ <a href="#pricing" class="bn-item" data-section="pricing" style="display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 10px;border-radius:14px;text-decoration:none;transition:background 0.2s;min-width:48px;">
+ <svg width="18" height="18" fill="none" stroke="#a89fb8" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+ <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:#a89fb8;letter-spacing:0.04em;">PLAN</span>
+ </a>
+ <a href="#donasi" class="bn-item" data-section="donasi" style="display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 10px;border-radius:14px;text-decoration:none;transition:background 0.2s;min-width:48px;">
+ <svg width="18" height="18" fill="none" stroke="#a89fb8" stroke-width="1.8" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+ <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:#a89fb8;letter-spacing:0.04em;">DONASI</span>
+ </a>
+ <a href="#faq" class="bn-item" data-section="faq" style="display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 10px;border-radius:14px;text-decoration:none;transition:background 0.2s;min-width:48px;">
+ <svg width="18" height="18" fill="none" stroke="#a89fb8" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+ <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:#a89fb8;letter-spacing:0.04em;">FAQ</span>
+ </a>
+ <a href="#team" class="bn-item" data-section="team" style="display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 10px;border-radius:14px;text-decoration:none;transition:background 0.2s;min-width:48px;">
+ <svg width="18" height="18" fill="none" stroke="#a89fb8" stroke-width="1.8" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+ <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:#a89fb8;letter-spacing:0.04em;">TEAM</span>
+ </a>
+ </div>
+ </nav>
+ <script>
+ (function(){
+ var items=document.querySelectorAll('.bn-item');
+ function setActive(id){
+ items.forEach(function(el){
+ var on=el.dataset.section===id;
+ el.style.background=on?'rgba(201,162,39,0.10)':'';
+ el.querySelectorAll('svg').forEach(function(s){s.setAttribute('stroke',on?'#c9a227':'#a89fb8');});
+ el.querySelectorAll('span').forEach(function(s){s.style.color=on?'#c9a227':'#a89fb8';});
+ });
+ }
+ var sections = ['beranda','fitur','pricing','donasi','faq','team'];
+
+ function updateActive() {
+ var offset = window.innerHeight * 0.35;
+ var current = sections[0];
+ for (var i = 0; i < sections.length; i++) {
+ var el = document.getElementById(sections[i]);
+ if (!el) continue;
+ var rect = el.getBoundingClientRect();
+ if (rect.top - offset <= 0) current = sections[i];
+ }
+ if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4) {
+ current = sections[sections.length - 1];
+ }
+ setActive(current);
+ }
+
+ var ticking = false;
+ function onScroll() {
+ if (!ticking) {
+ window.requestAnimationFrame(function() { updateActive(); ticking = false; });
+ ticking = true;
+ }
+ }
+
+ window.addEventListener('scroll', onScroll, { passive: true });
+ window.addEventListener('resize', updateActive);
+
+ items.forEach(function(el){
+ el.addEventListener('click', function(){
+ setTimeout(updateActive, 400);
+ });
+ });
+
+ updateActive();
+ })();
+ </script>
+
+</body>
+</html>
